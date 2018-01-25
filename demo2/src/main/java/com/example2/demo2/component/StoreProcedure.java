@@ -15,13 +15,11 @@ public class StoreProcedure {
 	private static final String DB_USER = "root";
 	private static final String DB_PASSWORD = "root";
 	
-	private ResultStoreP resultStorep = null;
 	
 	
-	
-	
-	public void callStoredProcedure(String name, String address, String email, String phone, BigDecimal saldo ) throws SQLException {
-
+	public ResultStoreP callStoredProcedure(String name, String address, String email, String phone, BigDecimal saldo ) throws SQLException {
+		
+		ResultStoreP resultStoreP = null;
 		Connection dbConnection = null;
 		CallableStatement callableStatement = null;
 
@@ -52,7 +50,8 @@ public class StoreProcedure {
 			System.out.println("idCliente: " + idClienteOut);
 			System.out.println("idCuenta : " + idCuentaOut);
 			System.out.println("saldo : " + saldoOut);
-
+			
+			resultStoreP = new ResultStoreP(idClienteOut, saldoOut, idCuentaOut);
 		} catch (SQLException e) {
 
 			System.out.println(e.getMessage());
@@ -68,6 +67,8 @@ public class StoreProcedure {
 			}
 
 		}
+		
+		return resultStoreP; 
 	}
 	
 	private Connection getDBConnection() {

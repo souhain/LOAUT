@@ -34,11 +34,11 @@ public class StoreProcedureServiceImpl implements StoreProcedureService {
 	
 	
 	@Override
-	public void insertarCliente(Cliente2 cliente2, Cuenta2 cuenta2) {
+	public ResultStoreP insertarCliente(Cliente2 cliente2, Cuenta2 cuenta2) {
 		LOGGER.info("Method insertarCliente()");
-		
+		ResultStoreP resultStoreP = null;
 		try {
-			storeProcedure.callStoredProcedure(
+			resultStoreP = storeProcedure.callStoredProcedure(
 					cliente2.getName(),
 					cliente2.getAddress(),
 					cliente2.getEmail(),
@@ -50,7 +50,7 @@ public class StoreProcedureServiceImpl implements StoreProcedureService {
 			e.printStackTrace();
 		}
 
-
+		return resultStoreP;
 	}
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example2.demo2.model.Cliente2;
 import com.example2.demo2.model.Cuenta2;
+import com.example2.demo2.model.ResultStoreP;
 import com.example2.demo2.service.StoreProcedureService;
 
 @Controller
@@ -41,9 +42,12 @@ public class Cliente2Controller {
 		ModelAndView mav = new ModelAndView(RESULT_VIEW);
 		LOGGER.info("Método agregarCliente: \n cliente " + cliente2_model + "\nCuenta" + cuenta2_model);
 
-		storeProcedureServiceImpl.insertarCliente(cliente2_model, cuenta2_model);
-		//mav.addObject("cliente2_model", cliente2_model);
-		//mav.addObject("cliente2_model", cuenta2_model);
+		ResultStoreP resultStoreP = storeProcedureServiceImpl.insertarCliente(cliente2_model, cuenta2_model);
+		mav.addObject("store_model", resultStoreP);
+		mav.addObject("id_Cliente", resultStoreP.getIdCliente());
+		mav.addObject("id_Cuenta", resultStoreP.getIdCuenta());
+		mav.addObject("Saldo", resultStoreP.getSaldo());
+		
 		return mav; 
 	}
 	
