@@ -7,11 +7,12 @@
 <body>
 	<p> Inserta un nuevo cliente  </p>
 	
-	<form action="#" th:action = "@{/cliente2/agregarCliente}"   th:object = "${cliente2_form}" method = "post">
-		<p>name <input type="text" th:field = "*{name}"/></p>
-		<p>address <input type="text" th:field = "*{address}"/></p>
-		<p>email <input type="text" th:field = "*{email}"/></p>
-		<p>phone <input type="text" th:field = "*{phone}"/></p>
+	<form action="#" th:action = "@{/cliente2/agregarCliente}"    method = "post">
+		<p>name <input type="text" th:field = "*{cliente2_form.name}"/></p>
+		<p>address <input type="text" th:field = "*{cliente2_form.address}"/></p>
+		<p>email <input type="text" th:field = "*{cliente2_form.email}"/></p>
+		<p>phone <input type="text" th:field = "*{cliente2_form.phone}"/></p>
+		<p>Saldo <input type="number" th:field = "*{cuenta2_form.saldo}"/></p>
 		<p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 	</form>
 

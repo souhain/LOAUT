@@ -20,8 +20,6 @@ import javax.persistence.Table;
 //		  @StoredProcedureParameter(mode = ParameterMode.IN, name = "id_cliente2", type = Integer.class)
 //		  })
 
-
-
 public class Cuenta2 {
 	//llave primaria
 	@Id
@@ -71,9 +69,16 @@ public class Cuenta2 {
 	public void setSaldo(BigDecimal saldo) {
 		this.saldo = saldo;
 	}
-
-
-
 	
 	
+	
+
+
+	@Override
+	public String toString() {
+		return "Cuenta2 [id_cuenta2=" + id_cuenta2 + ", saldo=" + saldo ;
+	}
+
+
+	public Cuenta2() {}
 }

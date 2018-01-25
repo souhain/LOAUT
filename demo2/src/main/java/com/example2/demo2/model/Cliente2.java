@@ -92,7 +92,14 @@ public class Cliente2 {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
 
+
+	@Override
+	public String toString() {
+		return "Cliente2  [id_cliente2=" + id_cliente2 + ", name=" + name + ", address=" + address + ", email=" + email
+				+ ", phone=" + phone + ", cuentas=" + cuentas + "]";
+	}
 
 	public Cliente2() {}
 }	
