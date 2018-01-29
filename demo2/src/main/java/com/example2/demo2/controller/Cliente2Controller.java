@@ -4,14 +4,19 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example2.demo2.model.Cliente2;
+import com.example2.demo2.model.Container;
 import com.example2.demo2.model.Cuenta2;
 import com.example2.demo2.model.ResultStoreP;
 import com.example2.demo2.service.StoreProcedureService;
@@ -31,25 +36,42 @@ public class Cliente2Controller {
 	@GetMapping("/showForm")
 	public ModelAndView showForm() {
 		ModelAndView mav = new ModelAndView(CLIENTES_VIEW);
-		mav.addObject("cliente2_form", new Cliente2());
-		mav.addObject("cuenta2_form", new Cuenta2());
+		mav.addObject("container_form", new Container());
 		return mav;
 	}
 	
-	@PostMapping("/agregarCliente")
-	public ModelAndView agregarCliente(@ModelAttribute("cliente2_form") Cliente2 cliente2_model, @ModelAttribute("cuenta2_form") Cuenta2 cuenta2_model) {
+	/*
+	
+	//@PostMapping("/agregarCliente")
+	@RequestMapping(value = "/agregarCliente", method = RequestMethod.POST,
+    consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE, MediaType.APPLICATION_JSON_VALUE},
+    produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+	@ResponseBody
+	public ModelAndView agregarCliente(@RequestBody Container c) {
 
 		ModelAndView mav = new ModelAndView(RESULT_VIEW);
-		LOGGER.info("Método agregarCliente: \n cliente " + cliente2_model + "\nCuenta" + cuenta2_model);
+	//	LOGGER.info("Método agregarCliente: \n cliente " + cliente2_model + "\nCuenta" + cuenta2_model);
 
-		ResultStoreP resultStoreP = storeProcedureServiceImpl.insertarCliente(cliente2_model, cuenta2_model);
+		ResultStoreP resultStoreP = storeProcedureServiceImpl.insertarCliente(c);
 		mav.addObject("store_model", resultStoreP);
-		mav.addObject("id_Cliente", resultStoreP.getIdCliente());
-		mav.addObject("id_Cuenta", resultStoreP.getIdCuenta());
-		mav.addObject("Saldo", resultStoreP.getSaldo());
 		
 		return mav; 
 	}
+	
+	*/
+	
+	
+	//@PostMapping("/agregarCliente")
+	@RequestMapping(value = "/agregarCliente", method = RequestMethod.POST)
+	@ResponseBody
+	public ResultStoreP agregarCliente(@RequestBody Container c) {
+		
+		System.out.println(c);
+
+		ResultStoreP resultStoreP = storeProcedureServiceImpl.insertarCliente(c);
+		return resultStoreP ;
+	}
+	
 	
 }
 

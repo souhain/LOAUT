@@ -1,20 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<title>Insert title here</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>Cuenta</title>
+		<base href="/" />
+        
+        <script src="https://apis.google.com/js/platform.js" ></script>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		
 </head>
 <body>
 	<p> Inserta un nuevo cliente  </p>
 	
-	<form action="#" th:action = "@{/cliente2/agregarCliente}"    method = "post">
-		<p>name <input type="text" th:field = "*{cliente2_form.name}"/></p>
-		<p>address <input type="text" th:field = "*{cliente2_form.address}"/></p>
-		<p>email <input type="text" th:field = "*{cliente2_form.email}"/></p>
-		<p>phone <input type="text" th:field = "*{cliente2_form.phone}"/></p>
-		<p>Saldo <input type="number" step="0.01" th:field = "*{cuenta2_form.saldo}"/></p>
-		<p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+	<form>
+		<p>name <input type="text" name="name" id="name"/></p>
+		<p>address <input type="text"  name="address" id="address"/></p>
+		<p>email <input type="text"  name="email" id="email"/></p>
+		<p>phone <input type="text"  name="phone" id="phone"/></p>
+		<p>Saldo <input type="number" step="0.01"  name="saldo" id="saldo"/></p>
+		<p><input type="button"  name="boton" id="boton" value="Submit" /></p>
 	</form>
+	
+	<script>
+		$("#boton").click(function(){
+                jsonObj = {
+                    "name":$("#name").val(),
+                    "address":$("#address").val(),
+                    "email": $("#email").val(),
+                    "phone":$("#phone").val(),
+                    "saldo":$("#saldo").val() };
+                console.log("CLICK");
+                console.log(jsonObj);
+                console.log(JSON.stringify(jsonObj));
+                var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "http://localhost:8080/cliente2/agregarCliente",
+                "method": "POST",
+                "headers": {
+                    "Content-Type": "application/json",
+                    "Cache-Control": "no-cache",
+                    "Postman-Token": "f98a90de-0233-e6e9-c02b-1d7b457c3f63"
+                },
+                "processData": false,
+                "data": JSON.stringify(jsonObj)
+                }
+                $.ajax(settings).done(function (response) {
+                		
+               		 console.log(response); 
+                });
+            });
+            	
+	</script>
 
 </body>
 </html>

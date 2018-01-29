@@ -66,7 +66,7 @@ public class Demo2ApplicationTests {
 		System.out.println("Test nombre  ");
 		
 		ResultStoreP resultStoreP = storeProcedure.callStoredProcedure(
-				"Javi", 
+				"Javier", 
 				"Emilio  25", 
 				"javarmgar@.com", 
 				"3", 
@@ -123,7 +123,8 @@ public class Demo2ApplicationTests {
 		
 		cuentaRepository.delete(new Integer(resultStoreP.getIdCuenta() ) );
 		clienteRepository.delete(new Integer(resultStoreP.getIdCliente() ));
-		assertEquals("Error en el correo", "javarmgar@gmail.com" , cl.getAddress());
+	//	System.out.println(cl);
+		assertEquals("Error en el correo", "javarmgar@gmail.com" , cl.getEmail());
 	
 	}
 	

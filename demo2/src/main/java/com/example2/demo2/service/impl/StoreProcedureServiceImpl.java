@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.example2.demo2.component.StoreProcedure;
 import com.example2.demo2.controller.Cliente2Controller;
 import com.example2.demo2.model.Cliente2;
+import com.example2.demo2.model.Container;
 import com.example2.demo2.model.Cuenta2;
 import com.example2.demo2.model.ResultStoreP;
 import com.example2.demo2.repository.Cliente2Repository;
@@ -34,16 +35,17 @@ public class StoreProcedureServiceImpl implements StoreProcedureService {
 	
 	
 	@Override
-	public ResultStoreP insertarCliente(Cliente2 cliente2, Cuenta2 cuenta2) {
+	public ResultStoreP insertarCliente(Container c) {
+		
 		LOGGER.info("Method insertarCliente()");
 		ResultStoreP resultStoreP = null;
 		try {
 			resultStoreP = storeProcedure.callStoredProcedure(
-					cliente2.getName(),
-					cliente2.getAddress(),
-					cliente2.getEmail(),
-					cliente2.getPhone(),
-					cuenta2.getSaldo()
+					c.getName(),
+					c.getAddress(),
+					c.getEmail(),
+					c.getPhone(),
+					c.getSaldo()
 					);
 		} catch (SQLException e) {
 
