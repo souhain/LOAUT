@@ -2,6 +2,10 @@
 <html>
 <head>
 		<meta charset="utf-8" />
+		<meta name="google-signin-scope" content="profile email"/>
+        <meta name="google-signin-client_id" content="440064316382-c366oiae9rp2i1gf2fsnuh801d8f6eku.apps.googleusercontent.com"/>
+        <script src="https://apis.google.com/js/platform.js" async="true" defer="true"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title>Cuenta</title>
 		<base href="/" />
@@ -20,7 +24,8 @@
 		<p>email <input type="text"  name="email" id="email"/></p>
 		<p>phone <input type="text"  name="phone" id="phone"/></p>
 		<p>Saldo <input type="number" step="0.01"  name="saldo" id="saldo"/></p>
-		<p>Ejecutive Email <input type="text"  name="ejecutive_email" id="ejecutive_email"/></p>
+		<p>Ejecutive Email <input type="hidden"  name="ejecutive_email" id="ejecutive_email"/></p>
+		<div id="logidentity" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 		<p><input type="button"  name="boton" id="boton" value="Submit" /></p>
 	</form>
 	
@@ -54,6 +59,27 @@
                		 console.log(response); 
                 });
             });
+		
+		
+		
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log("ID: " + profile.getId());
+            console.log('Full Name: ' + profile.getName());
+            console.log("Email: " + profile.getEmail());
+           //  var id_token = googleUser.getAuthResponse().id_token;
+            ejecutivo = profile.getEmail();
+            $("#ejecutive_email").val(profile.getEmail());
+        	$("#logidentity").hide("slow");
+/*             console.log("ID Token: " + id_token);
+            
+            if(profile.getName() == ""){
+            	location.href = "/";
+            }else{
+            	$("#strejecutivo").val(profile.getEmail());
+            	$("#logidentity").hide("slow");
+            }  */
+        };
             	
 	</script>
 
