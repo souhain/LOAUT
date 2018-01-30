@@ -50,7 +50,8 @@ public class Demo2ApplicationTests {
 				"Emilio  25", 
 				"javarmgar@.com", 
 				"3", 
-				new BigDecimal( 70.0) );
+				new BigDecimal( 70.0),
+				"ejecutive_Javie@.com");
 		
 		
 		cuentaRepository.delete(resultStoreP.getIdCuenta() );
@@ -66,11 +67,12 @@ public class Demo2ApplicationTests {
 		System.out.println("Test nombre  ");
 		
 		ResultStoreP resultStoreP = storeProcedure.callStoredProcedure(
-				"Javier", 
+				"Javie", 
 				"Emilio  25", 
 				"javarmgar@.com", 
 				"3", 
-				new BigDecimal( 70.0) );
+				new BigDecimal( 70.0),
+				"ejecutive_Javie@.com");
 	
 		Cliente2 cl = clienteRepository.findOne(new Integer( resultStoreP.getIdCliente()));
 		Cuenta2 cu=cuentaRepository.findOne(resultStoreP.getIdCuenta());
@@ -90,11 +92,12 @@ public class Demo2ApplicationTests {
 		System.out.println("Test de address ");
 		
 		ResultStoreP resultStoreP = storeProcedure.callStoredProcedure(
-				"Javier", 
+				"Javie", 
 				"Emilio  25", 
 				"javarmgar@.com", 
 				"3", 
-				new BigDecimal( 70.0) );
+				new BigDecimal( 70.0),
+				"ejecutive_Javie@.com");
 	
 		Cliente2 cl = clienteRepository.findOne(new Integer( resultStoreP.getIdCliente()));
 		
@@ -111,11 +114,12 @@ public class Demo2ApplicationTests {
 		System.out.println("Test de email");
 		
 		ResultStoreP resultStoreP = storeProcedure.callStoredProcedure(
-				"Javier", 
+				"Javie", 
 				"Emilio  25", 
-				"javarmgar@gmail.com", 
+				"javarmgar@.com", 
 				"3", 
-				new BigDecimal( 70.0) );
+				new BigDecimal( 70.0),
+				"ejecutive_Javie@.com");
 	
 		Cliente2 cl = clienteRepository.findOne(new Integer( resultStoreP.getIdCliente()));
 		
@@ -134,11 +138,12 @@ public class Demo2ApplicationTests {
 		System.out.println("Test de phone");
 		
 		ResultStoreP resultStoreP = storeProcedure.callStoredProcedure(
-				"Javier", 
+				"Javie", 
 				"Emilio  25", 
-				"javarmgar@gmail.com", 
-				"3493284879", 
-				new BigDecimal( 70.0) );
+				"javarmgar@.com", 
+				"3", 
+				new BigDecimal( 70.0),
+				"ejecutive_Javie@.com");
 	
 		Cliente2 cl = clienteRepository.findOne(new Integer( resultStoreP.getIdCliente()));
 		
@@ -147,6 +152,30 @@ public class Demo2ApplicationTests {
 		cuentaRepository.delete(new Integer(resultStoreP.getIdCuenta() ) );
 		clienteRepository.delete(new Integer(resultStoreP.getIdCliente() ));
 		assertEquals("Error en el telefono", "3493284879" , cl.getPhone());
+
+	}
+	
+
+	@Test
+	public void ejecutiveTest() throws SQLException {
+		System.out.println("Test de phone");
+		
+		ResultStoreP resultStoreP = storeProcedure.callStoredProcedure(
+				"Javie", 
+				"Emilio  25", 
+				"javarmgar@.com", 
+				"3", 
+				new BigDecimal( 70.0),
+				"ejecutive_Javie@.com");
+	
+		Cliente2 cl = clienteRepository.findOne(new Integer( resultStoreP.getIdCliente()));
+		Cuenta2 cu=cuentaRepository.findOne(resultStoreP.getIdCuenta());
+		
+		
+		
+		cuentaRepository.delete(new Integer(resultStoreP.getIdCuenta() ) );
+		clienteRepository.delete(new Integer(resultStoreP.getIdCliente() ));
+		assertEquals("Error en el ejecutivo", "ejecutive_Javie@.com" , cu.getEjecutive_email());
 
 	}
 

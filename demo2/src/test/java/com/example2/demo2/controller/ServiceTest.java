@@ -41,7 +41,8 @@ public class ServiceTest {
 			+ "\"address\":\"hidalgo\","
 			+ "\"email\":\"javarmgar@gmail.com\","
 			+ "\"phone\":\"24353451\","
-			+ "\"saldo\":\"43240.11\"}";
+			+ "\"saldo\":\"43240.11\","
+			+ "\"ejecutive_email\":\"javo_ejec@gmail.com\"}";
 	
 
 	@Test
@@ -56,7 +57,8 @@ public class ServiceTest {
 						Mockito.anyString(), 
 						Mockito.anyString(), 
 						Mockito.anyString(), 
-						new BigDecimal ( Mockito.anyDouble() ) 
+						new BigDecimal ( Mockito.anyDouble() ),
+						Mockito.anyString()
 						)
 				).thenReturn(resultStoreP);
 			

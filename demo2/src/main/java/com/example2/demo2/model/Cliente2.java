@@ -16,13 +16,8 @@ import javax.persistence.ParameterMode;
 import javax.persistence.Table;
 
 import javax.persistence.*;
-@Entity 
-//@NamedStoredProcedureQuery(name = "insertarCliente", procedureName = "insertarCliente", parameters = {
-//		  @StoredProcedureParameter(mode = ParameterMode.IN, name = "name", type = String.class),
-//		  @StoredProcedureParameter(mode = ParameterMode.IN, name = "address", type = String.class),
-//		  @StoredProcedureParameter(mode = ParameterMode.IN, name = "email", type = String.class),
-//		  @StoredProcedureParameter(mode = ParameterMode.IN, name = "phone", type = String.class) })
-
+@Entity
+@Table(name="cliente2")
 public class Cliente2 {
 	
 	//llave primaria

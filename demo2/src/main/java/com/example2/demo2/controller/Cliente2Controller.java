@@ -40,28 +40,8 @@ public class Cliente2Controller {
 		return mav;
 	}
 	
-	/*
-	
-	//@PostMapping("/agregarCliente")
-	@RequestMapping(value = "/agregarCliente", method = RequestMethod.POST,
-    consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE, MediaType.APPLICATION_JSON_VALUE},
-    produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-	@ResponseBody
-	public ModelAndView agregarCliente(@RequestBody Container c) {
 
-		ModelAndView mav = new ModelAndView(RESULT_VIEW);
-	//	LOGGER.info("Método agregarCliente: \n cliente " + cliente2_model + "\nCuenta" + cuenta2_model);
-
-		ResultStoreP resultStoreP = storeProcedureServiceImpl.insertarCliente(c);
-		mav.addObject("store_model", resultStoreP);
-		
-		return mav; 
-	}
 	
-	*/
-	
-	
-	//@PostMapping("/agregarCliente")
 	@RequestMapping(value = "/agregarCliente", method = RequestMethod.POST)
 	@ResponseBody
 	public ResultStoreP agregarCliente(@RequestBody Container c) {

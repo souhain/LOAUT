@@ -42,6 +42,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`Cuenta2` (
   `id_cuenta2` INT NOT NULL AUTO_INCREMENT,
   `saldo` DECIMAL NULL,
+  `ejecutive_email` VARCHAR(100) NULL,
   `cliente2_id_cliente2` INT NOT NULL,
   PRIMARY KEY (`id_cuenta2`, `cliente2_id_cliente2`),
   INDEX `fk_cliente2_id_cliente2_idx` (`cliente2_id_cliente2` ASC),
@@ -63,7 +64,7 @@ USE `mydb`;
 DROP procedure IF EXISTS `insertarCliente`;
 DELIMITER $$
 USE `mydb`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarCliente`(
+CREATE PROCEDURE `insertarCliente`(
   in name VARCHAR(45),
   in address VARCHAR(45),
   in email VARCHAR(100),
@@ -82,13 +83,14 @@ DROP procedure IF EXISTS `insertarCuenta`;
 
 DELIMITER $$
 USE `mydb`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarCuenta`(
+CREATE PROCEDURE `insertarCuenta`(
  saldo DECIMAL,
- cliente2_id_cliente2 INT
+ cliente2_id_cliente2 INT,
+ ejecutive_email VARCHAR(100)
 )
 BEGIN
-  insert into cuenta2 (saldo, cliente2_id_cliente2) values
-  (`saldo`,`cliente2_id_cliente2`);
+  insert into cuenta2 (saldo, cliente2_id_cliente2,ejecutive_email) values
+  (`saldo`,`cliente2_id_cliente2`,`ejecutive_email`);
 END $$
 DELIMITER ;
 
@@ -100,12 +102,13 @@ DROP procedure IF EXISTS `SPFinal1`;
 
 DELIMITER $$
 USE `mydb`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPFinal1`(
+CREATE  PROCEDURE `SPFinal1`(
   in name VARCHAR(45),
   in address VARCHAR(45),
   in email VARCHAR(100),
-  in phone VARCHAR(45),
+  in phone VARCHAR(45),	
   in saldo DECIMAL,
+  in ejecutive_email VARCHAR(100),
   out idClienteOut int,
   out idCuentaOut int,
   out saldoOut decimal
@@ -123,11 +126,12 @@ BEGIN
     
     select id_cliente2 into idClienteOut from cliente2 where (cliente2.name = name and cliente2.address = address and cliente2.email = email and cliente2.phone = phone) limit 1;
 
-  call insertarCuenta(saldo, idClienteOut);
+  call insertarCuenta(saldo, idClienteOut,ejecutive_email);
    
  
     select id_cuenta2 into idCuentaOut  from cuenta2 where(
     cuenta2.saldo = saldo and cuenta2.cliente2_id_cliente2 = idClienteOut
+    					and cuenta2.ejecutive_email=ejecutive_email
     ) limit 1;
     
     set saldoOut = saldo;

@@ -15,13 +15,5 @@ import com.example2.demo2.model.Cuenta2;
 @Repository("cuenta2Repository")
 public interface Cuenta2Repository extends PagingAndSortingRepository<Cuenta2, Integer>{
 
-	@Query(value = "{call SPFinal1(:name, :address, :email, :phone, :saldo )}"
-			, nativeQuery = true
-			)
-	public List<Cuenta2> SPFinal1(
-			@Param("name") String name, 
-			@Param("address") String address, 
-			@Param("email") String email, 
-			@Param("phone") String phone, 
-			@Param("saldo") BigDecimal saldo);
+	
 }

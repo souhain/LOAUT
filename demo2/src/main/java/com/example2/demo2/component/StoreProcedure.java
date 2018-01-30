@@ -18,13 +18,13 @@ public class StoreProcedure {
 	
 	
 	
-	public ResultStoreP callStoredProcedure(String name, String address, String email, String phone, BigDecimal saldo ) throws SQLException {
+	public ResultStoreP callStoredProcedure(String name, String address, String email, String phone, BigDecimal saldo,String ejecutive_email ) throws SQLException {
 		
 		ResultStoreP resultStoreP = null;
 		Connection dbConnection = null;
 		CallableStatement callableStatement = null;
 
-		String SPFinal1 = "{call SPFinal1(?, ?, ?, ?, ?, ?, ?, ?)}";
+		String SPFinal1 = "{call SPFinal1(?, ?, ?, ?, ?, ?, ?, ?,?)}";
 
 		try {
 			dbConnection =jdbcTemplate.getDataSource().getConnection();
@@ -35,18 +35,19 @@ public class StoreProcedure {
 			callableStatement.setString(3, email );
 			callableStatement.setString(4, phone );
 			callableStatement.setBigDecimal(5, saldo);
+			callableStatement.setString(6, ejecutive_email);
 			
 			
-			callableStatement.registerOutParameter(6, java.sql.Types.INTEGER);
 			callableStatement.registerOutParameter(7, java.sql.Types.INTEGER);
-			callableStatement.registerOutParameter(8, java.sql.Types.DECIMAL);
+			callableStatement.registerOutParameter(8, java.sql.Types.INTEGER);
+			callableStatement.registerOutParameter(9, java.sql.Types.DECIMAL);
 
 			// execute SPFinal1 store procedure
 			callableStatement.executeUpdate();
 
-			int idClienteOut = callableStatement.getInt(6);
-			int idCuentaOut = callableStatement.getInt(7);
-			BigDecimal saldoOut = callableStatement.getBigDecimal(8);
+			int idClienteOut = callableStatement.getInt(7);
+			int idCuentaOut = callableStatement.getInt(8);
+			BigDecimal saldoOut = callableStatement.getBigDecimal(9);
 
 			System.out.println("idCliente: " + idClienteOut);
 			System.out.println("idCuenta : " + idCuentaOut);

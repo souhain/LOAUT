@@ -9,17 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedStoredProcedureQuery;
-import javax.persistence.ParameterMode;
-import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
-@Entity
-//
-//@NamedStoredProcedureQuery(name = "insertarCuenta", procedureName = "insertarCuenta", parameters = {
-//		  @StoredProcedureParameter(mode = ParameterMode.IN, name = "saldo", type = Double.class),
-//		  @StoredProcedureParameter(mode = ParameterMode.IN, name = "id_cliente2", type = Integer.class)
-//		  })
 
+@Entity
+@Table(name="cuenta2")
 public class Cuenta2 {
 	//llave primaria
 	@Id
@@ -27,8 +20,21 @@ public class Cuenta2 {
 	@GeneratedValue(strategy = GenerationType.AUTO )
 	private int id_cuenta2;
 	
+	@Column(name="ejecutive_email")
+	private String ejecutive_email;
+	
 	//atributos
 	
+	public String getEjecutive_email() {
+		return ejecutive_email;
+	}
+
+
+	public void setEjecutive_email(String ejecutive_email) {
+		this.ejecutive_email = ejecutive_email;
+	}
+
+
 	@Column(name = "saldo")
 	private BigDecimal saldo;
 	
@@ -70,10 +76,6 @@ public class Cuenta2 {
 		this.saldo = saldo;
 	}
 	
-	
-	
-
-
 	@Override
 	public String toString() {
 		return "Cuenta2 [id_cuenta2=" + id_cuenta2 + ", saldo=" + saldo ;

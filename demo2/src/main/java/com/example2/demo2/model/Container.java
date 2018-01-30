@@ -3,7 +3,13 @@ package com.example2.demo2.model;
 import java.math.BigDecimal;
 
 public class Container {
-	private String name,address,email,phone;
+	private String name,address,email,phone,ejecutive_email;
+	public String getEjecutive_email() {
+		return ejecutive_email;
+	}
+	public void setEjecutive_email(String ejecutive_email) {
+		this.ejecutive_email = ejecutive_email;
+	}
 	private BigDecimal saldo;
 	public String getName() {
 		return name;

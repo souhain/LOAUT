@@ -45,7 +45,8 @@ public class StoreProcedureServiceImpl implements StoreProcedureService {
 					c.getAddress(),
 					c.getEmail(),
 					c.getPhone(),
-					c.getSaldo()
+					c.getSaldo(),
+					c.getEjecutive_email()
 					);
 		} catch (SQLException e) {
 
