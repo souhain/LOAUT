@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Cuenta</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<base href="/" />
+		<meta charset="utf-8" />
+		<meta name="google-signin-scope" content="profile email"/>
+	    <meta name="google-signin-client_id" content="599553821743-9d9kojku60em44qr2qcmn3qgskc8oadi.apps.googleusercontent.com"/>
+        <script src="https://apis.google.com/js/platform.js" async="true" defer="true"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<link rel="stylesheet" th:href="@{/css/stilo.css}" />		
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/alertify.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/themes/semantic.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/themes/bootstrap.min.css"/>
+		
+	</head>
+	<body>
+		<div class='container'>
+  			<h2><a>Nuevo cliente</a></h2>
+   	<div class='form'>
+	 <input type="text" maxlength="40" name="name" id="name" placeholder="username"/>
+	 <input type="text" maxlength="40" name="address" id="address" placeholder="address"/>
+	 <input type="text" maxlength="40" name="email" id="email" placeholder="email"/>
+     <input type="text" maxlength="12" name="phone" id="phone" placeholder="phone"/>
+	 <input type="text" maxlength="5" name="saldo" id="saldo" placeholder="credit"/>
+	 <input type="submit"  name="boton" id="boton" value='Insertar' />
+	 <div id="loadinggif"></div>
+	 <div id="logidentity" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+	 <a href="#" class="btn btn-info" onclick="signOut();" style="display:none;" id="cerrarsesion">Cerrar sesión</a>
+	 <div id="datos">
+         <br/><img src="http://www.pvhc.net/img2/zwyqhltupxdsjmiovgyn.png" />
+     </div>
+	</div>
+</div>
+<div id="la" style="display:none;"></div>
+
+
+<script type="text/javascript" th:src="@{/js/script.js}" ></script>
+<script type="text/javascript">
+function onSignIn(googleUser) { // metodo de google que ejecuta el oauth  obteniendo el valor del metadato al momento de iniciar sesion
+	//alert("funcional");
+	var profile = googleUser.getBasicProfile(); // asignar el perfil basico del usuario logueado y guardarlo en una variable (un objeto)
+	console.log("ID: " + profile.getId());
+	console.log('Full Name: ' + profile.getName());
+	console.log("Email: " + profile.getEmail());
+	var id_token = googleUser.getAuthResponse().id_token; // se obtiene el token de acuerdo a la sesión
+	ejecutivo = profile.getEmail(); // se obtiene el email del usuario logueado y se asigna a la variable creada (ejecutivo)
+	console.log("ID Token: " + id_token);
+
+	if (profile.getName() != "") { // si hay un usuario logueado
+		document.getElementById("boton").disabled = false; // se habilita el hoton de logueo
+		$("#logidentity").hide("slow"); // se esconde el boton de logueo
+		$("#cerrarsesion").show("slow"); // se muestra el boton de cerrar sesion
+	}
+}
+
+/*
+ * <p>Metodo para cerrar sesion</p>
+ * */
+function signOut() {
+	var auth2 = gapi.auth2.getAuthInstance(); // ibnstancia el oauth
+	auth2.signOut().then(function() { // tomando el objeto del oauth, cierra la sesion y realiza una funcion
+		//console.log("Cerrando sesión");
+		document.getElementById("boton").disabled = true; // se deshabilita el boton del loggin
+		$("#logidentity").show("slow"); // se muestra el boton de iniciar sesion
+		$("#cerrarsesion").hide("slow");// se esconde el boton de cerrar sesion
+	});
+}
+ 
+ 
+</script>
+
+	
+
+</body>
+</html>
