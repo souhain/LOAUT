@@ -18,7 +18,7 @@ import com.storedprocedures.modelo.OutputData;
 @Service("storedservice")
 public class StoredService extends StoredProcedure{
 	
-	private static final String SPROC_NAME = "SPFinal1";
+	private static final String SPROC_NAME = "nuevo_cliente";
 	
 	@Autowired
 	StoredService(DataSource dataSource) {
